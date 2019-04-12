@@ -13,6 +13,13 @@ Requirements
 
  *
 
+Installation
+------------
+
+```bash
+ansible-galaxy install wluisaraujo.ansible_ovirt_guest_agent
+```
+
 Role Variables
 --------------
 

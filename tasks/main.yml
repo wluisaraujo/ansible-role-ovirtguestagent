@@ -1,5 +1,33 @@
 ---
 # tasks file for iac-ansible-ovirt-guest-agent
-- name: Importando tarefas para instalar AWX
-  include_tasks: config2{{ ansible_distribution }}.yml  
+
+- name: Testando conectividade com internet
+  get_url: 
+    url: http://www.pudim.com.br
+    dest: /tmp/teste.log
+    tmp_dest: /tmp/
+    mode: 0777
+    force: yes
+    validate_certs: no
+  ignore_errors: yes
+  when: (ansible_system == "Linux")
+  register: CONN
+    
+- name: "Instalando e configurando oVirt Guest Agent em {{ ansible_distribution }}"
+  include_tasks: net-install-ovirtguest-{{ ansible_distribution }}.yml
+  when:
+    - CONN is success
+    - ansible_system == "Linux"
+    - ansible_virtualization_role == "guest"
+    - ansible_virtualization_type == "RHEV"
+
+- name: "Instalando e configurando oVirt Guest Agent  em {{ ansible_distribution }} localmente"
+  include_tasks: local-install-ovirtguest-{{ ansible_distribution }}.yml
+  when:
+    - CONN is failed
+    - ansible_system == "Linux"
+    - ansible_virtualization_role == "guest"
+    - ansible_virtualization_type == "RHEV"
+
+## END PLAYBOOK
 ...
