@@ -1,2 +1,4 @@
 ---
-# vars file for iac-ansible-awx
+# vars file for iac-ansible-ovirt-guest-agent
+
+...

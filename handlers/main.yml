@@ -11,6 +11,16 @@
   when: 
     - ansible_service_mgr == "systemd"
 
+- name: Enable {{ service_name }}
+  systemd:
+    state: started
+    name: {{ service_name }}.service
+    enabled: yes
+    force: yes
+  ignore_errors: yes
+  when: 
+    - ansible_service_mgr == "systemd"
+
 - name: Stop {{ service_name }}
   systemd:
     state: stopped
@@ -43,6 +53,13 @@
 - name: Start {{ service_name }}
   service:
     state: started
+    name: {{ service_name }}
+    enabled: yes
+  when: 
+    - ansible_service_mgr == "service"
+
+- name: Enable {{ service_name }}
+  service:
     name: {{ service_name }}
     enabled: yes
   when: 
