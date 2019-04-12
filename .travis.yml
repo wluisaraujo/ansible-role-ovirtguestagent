@@ -13,7 +13,7 @@ services:
 
 env:
   global:
-    - ROLE_NAME: iac-ansible-awx
+    - ROLE_NAME: iac-ansible-ovirt-guest-agent
     - ANSIBLE_ACTION_WARNINGS: "False"
     - ANSIBLE_COMMAND_WARNINGS: "False"
     - ANSIBLE_DEPRECATION_WARNINGS: "False"
@@ -22,16 +22,16 @@ env:
      
  - distribution: centos
    version: 7
-# - distribution: fedora
-#   version: 26
-# - distribution: fedora
-#   version: 25
-# - distribution: fedora
-#   version: 24
+ - distribution: fedora
+   version: 26
+ - distribution: fedora
+   version: 25
+ - distribution: fedora
+   version: 24
  - distribution: ubuntu
    version: trust
-# - distribution: ubuntu
-#   version: trusty
+ - distribution: ubuntu
+   version: trusty
  - distribution: debian
    version: stretch
  - distribution: debian
@@ -56,7 +56,7 @@ install:
 
 
  # Install ansible role
- - ansible-galaxy install wluisaraujo.iac-ansible-awx
+ - ansible-galaxy install wluisaraujo.ansible_ovirt_guest_agent
 
 script:
  # Basic role syntax check

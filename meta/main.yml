@@ -1,10 +1,12 @@
 ---
 galaxy_info:
   author: w.luis.araujo
-  description: "Install AWX"
+  description: "Ansible role for installing Ovirt Guest Agent"
   company: LUSAR
   license: "(GPLv3)"
+
   min_ansible_version: 2.0
+  
   platforms:
   - name: EL
     versions:
@@ -13,12 +15,8 @@ galaxy_info:
     versions:
     - all
   galaxy_tags: 
-    - awx
-    - automation
-    - tower
-    - ansible-tower
+    - ovirt-guest-agent
+    - ovirt
 
-dependencies: 
-  - role: wluisaraujo.iac-ansible-docker
-  - role: wluisaraujo.iac-ansible-postgresql
+  dependencies: []
 ...
