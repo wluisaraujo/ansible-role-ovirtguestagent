@@ -1,0 +1,5 @@
+---
+# tasks file for iac-ansible-awx
+- name: Importando tarefas para instalar AWX
+  include_tasks: config2{{ ansible_distribution }}.yml  
+...
