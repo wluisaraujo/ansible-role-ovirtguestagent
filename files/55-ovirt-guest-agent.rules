@@ -1,0 +1,1 @@
+SYMLINK=="virtio-ports/ovirt-guest-agent.0", OWNER="ovirtagent", GROUP="ovirtagent"

@@ -1,0 +1,39 @@
+---
+# tasks file for corpflex-ovirt-guest-agent
+- name: "[NET INSTALL] Instalando oVirt Guest Agent para {{ ansible_distribution }}/{{ ansible_distribution_major_version }}"
+  when: ansible_os_family == 'Debian'
+  apt_repository:
+    repo: deb http://download.opensuse.org/repositories/home:/evilissimo:/deb/Debian_7.0/ ./
+    state: present
+  register: REPOSITORY  
+
+- apt_key:
+    data: "{{ lookup('file', 'debian/Release.key') }}"
+    state: present
+    id: D5C7F7C373A1A299
+  ignore_errors: yes
+  when: ansible_os_family == 'Debian'
+  register: REPOKEY
+
+- apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:  
+    - python-apt
+    - python-dbus
+    - python-ethtool
+    - python
+    - ovirt-guest-agent
+  when: 
+    - ansible_os_family == 'Debian'
+    - REPOSITORY is success
+    - REPOKEY is success
+  register: PACKAGE
+  notify:
+    - Enable ovirt-guest-agent
+    - Restart ovirt-guest-agent
+
+- include_tasks: service.yml
+  when: PACKAGE is success
+...

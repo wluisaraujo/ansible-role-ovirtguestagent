@@ -1,31 +1,35 @@
 ---
 # tasks file for iac-ansible-ovirt-guest-agent
 
-- name: Testando conectividade com internet
+- assert:
+    msg: "Só pode ser aplicada ao ambiente Linux"
+    that: 
+      - ansible_system == "Linux"
+      - ansible_virtualization_role == "guest"
+      - ansible_virtualization_type == "RHEV"
+
+- name: "Testando conectividade com internet"
   get_url: 
-    url: http://www.pudim.com.br
+    url: http://www.meuip.com.br
     dest: /tmp/teste.log
     tmp_dest: /tmp/
     mode: 0777
     force: yes
     validate_certs: no
   ignore_errors: yes
-  when: (ansible_system == "Linux")
   register: CONN
-    
-- name: "Instalando e configurando oVirt Guest Agent em {{ ansible_distribution }}"
+
+- name: "Instalando e configurando oVirt Guest Agent em {{ ansible_distribution }}//{{ ansible_distribution_major_version }}"
   include_tasks: net-install-ovirtguest-{{ ansible_distribution }}.yml
-  when:
+  when: 
     - CONN is success
-    - ansible_system == "Linux"
     - ansible_virtualization_role == "guest"
     - ansible_virtualization_type == "RHEV"
 
-- name: "Instalando e configurando oVirt Guest Agent  em {{ ansible_distribution }} localmente"
+- name: "Instalando e configurando oVirt Guest Agent  em {{ ansible_distribution }}/{{ ansible_distribution_major_version }} local"
   include_tasks: local-install-ovirtguest-{{ ansible_distribution }}.yml
-  when:
+  when: 
     - CONN is failed
-    - ansible_system == "Linux"
     - ansible_virtualization_role == "guest"
     - ansible_virtualization_type == "RHEV"
 

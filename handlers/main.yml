@@ -1,89 +1,82 @@
 ---
-# handlers file for ovirt-guest-agent
+# defaults file for handlers file for corpflex-ovirt-guest-agent
+
 ## SystemD
-- name: Start {{ service_name }}
+- name: "Start ovirt-guest-agent"
   systemd:
     state: started
-    name: {{ service_name }}.service
+    name: "ovirt-guest-agent.service"
     enabled: yes
     force: yes
   ignore_errors: yes
-  when: 
-    - ansible_service_mgr == "systemd"
+  when: ansible_service_mgr == "systemd"
 
-- name: Enable {{ service_name }}
+- name: "Enable ovirt-guest-agent"
   systemd:
     state: started
-    name: {{ service_name }}.service
+    name: "ovirt-guest-agent.service"
     enabled: yes
     force: yes
   ignore_errors: yes
-  when: 
-    - ansible_service_mgr == "systemd"
+  when: ansible_service_mgr == "systemd"
 
-- name: Stop {{ service_name }}
+- name: "Stop ovirt-guest-agent"
   systemd:
     state: stopped
-    name: {{ service_name }}.service
+    name: "ovirt-guest-agent.service"
     enabled: yes
     force: yes
   ignore_errors: yes
-  when: 
-    - ansible_service_mgr == "systemd"
+  when: ansible_service_mgr == "systemd"
     
-- name: Restart {{ service_name }}
+- name: "Restart ovirt-guest-agent"
   systemd:
     state: restarted
-    name: {{ service_name }}.service
+    name: "ovirt-guest-agent.service"
     force: yes
   ignore_errors: yes
-  when: 
-    - ansible_service_mgr == "systemd"
+  when: ansible_service_mgr == "systemd"
 
-- name: Reload {{ service_name }}
+- name: "Reload ovirt-guest-agent"
   systemd:
     state: reloaded
-    name: {{ service_name }}.service
+    name: "ovirt-guest-agent.service"
     force: yes
   ignore_errors: yes
-  when: 
-    - ansible_service_mgr == "systemd"     
+  when: ansible_service_mgr == "systemd"     
 
 ## SystemV
-- name: Start {{ service_name }}
+- name: "Start ovirt-guest-agent"
   service:
     state: started
-    name: {{ service_name }}
+    name: "ovirt-guest-agent"
     enabled: yes
-  when: 
-    - ansible_service_mgr == "service"
+  when: ansible_service_mgr == "service"
 
-- name: Enable {{ service_name }}
+- name: "Enable ovirt-guest-agent"
   service:
-    name: {{ service_name }}
+    name: "ovirt-guest-agent"
     enabled: yes
-  when: 
-    - ansible_service_mgr == "service"
+  when: ansible_service_mgr == "service"
 
-- name: Stop {{ service_name }}
+- name: "Stop ovirt-guest-agent"
   service:
     state: stopped
-    name: {{ service_name }}
+    name: "ovirt-guest-agent"
     enabled: yes
-  when: 
-    - ansible_service_mgr == "service"
+  when: ansible_service_mgr == "service"
     
-- name: Restart {{ service_name }}
+- name: "Restart ovirt-guest-agent"
   service:
     state: restarted
-    name: {{ service_name }}
-  when: 
-    - ansible_service_mgr == "service"
+    name: "ovirt-guest-agent"
+  when: ansible_service_mgr == "service"
 
-- name: Reload {{ service_name }}
+- name: "Reload ovirt-guest-agent"
   service:
     state: reloaded
-    name: {{ service_name }}
-  when: 
-    - ansible_service_mgr == "service"
+    name: "ovirt-guest-agent"
+  when: ansible_service_mgr == "service"
+
+# IN THE END
 ...

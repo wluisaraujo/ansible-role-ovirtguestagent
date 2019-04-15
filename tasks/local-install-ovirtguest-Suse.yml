@@ -1,0 +1,48 @@
+---
+# tasks file for corpflex-ovirt-guest-agent
+
+- name: "[LOCAL INSTALL] Instalando oVirt Guest Agent para {{ ansible_distribution }}/{{ ansible_distribution_major_version }}"
+  when: ansible_distribution == "Suse"
+  copy:
+    src: "{{ item.src_pkg }}"
+    dest: "{{ item.dest_pkg }}"
+    mode: 0755
+  with_items:
+    - { src_pkg: 'suse/libnl3-200-3.2.23-2.21.x86_64.rpm',              dest_pkg: '/tmp/libnl3-200-3.2.23-2.21.x86_64.rpm' }
+    - { src_pkg: 'suse/libnl-config-3.2.23-2.21.noarch.rpm',            dest_pkg: '/tmp/libnl-config-3.2.23-2.21.noarch.rpm' }
+    - { src_pkg: 'suse/python-ethtool-0.11-5.2.x86_64.rpm',             dest_pkg: '/tmp/python-ethtool-0.11-5.2.x86_64.rpm' }
+    - { src_pkg: 'suse/ovirt-guest-agent-common-1.0.12-1.1.noarch.rpm', dest_pkg: '/tmp/ovirt-guest-agent-common-1.0.12-1.1.noarch.rpm' }
+  register: COPY  
+  
+- zypper:
+    name:  "{{ item }}"
+    state: present
+    disable_gpg_check: yes
+    disable_recommends: yes
+  loop:
+    - /tmp/libnl3-200-3.2.23-2.21.x86_64.rpm
+    - /tmp/libnl-config-3.2.23-2.21.noarch.rpm
+    - /tmp/python-ethtool-0.11-5.2.x86_64.rpm
+    - /tmp/ovirt-guest-agent-common-1.0.12-1.1.noarch.rpm
+  when: COPY is success
+  register: DEP
+
+- zypper:
+    name: /tmp/ovirt-guest-agent-common-1.0.12-1.1.noarch.rpm
+    state: present
+    disable_gpg_check: yes
+    disable_recommends: yes
+  when: DEP is success
+  register: PACKAGE  
+  notify:
+    - Enable ovirt-guest-agent
+    - Restart ovirt-guest-agent
+
+- include_tasks: files.yml
+  when: PACKAGE is success
+
+- include_tasks: service.yml
+  when: PACKAGE is success
+
+## END PLAYBOOK  
+...

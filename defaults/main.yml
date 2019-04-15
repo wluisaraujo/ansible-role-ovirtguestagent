@@ -5,3 +5,23 @@ ovirt_package: []
 ovirt_guest_agent_service_name: []
 ovirt_win_iso_url: http://resources.ovirt.org/pub/ovirt-4.2/iso/oVirt-toolsSetup/4.2-1.el7.centos/oVirt-toolsSetup-4.2-1.el7.centos.iso
 ovirt_win_iso_name: oVirt-toolsSetup.iso
+
+service_name: ovirt-guest-agent
+
+deb_src_pkg: debian/qemu-guest-agent_2.8+dfsg-6+deb9u4_amd64.deb
+deb_pkg: qemu-guest-agent_2.8+dfsg-6+deb9u4_amd64.deb
+
+el6_src_pkg: el6/qemu-guest-agent-0.12.1.2-2.506.el6_10.1.x86_64.rpm
+el6_pkg: qemu-guest-agent-0.12.1.2-2.506.el6_10.1.x86_64.rpm
+
+el7_src_pkg: el7/qemu-guest-agent-2.12.0-2.el7.x86_64.rpm
+el7_pkg: qemu-guest-agent-2.12.0-2.el7.x86_64.rpm
+
+fc28_src_pkg: fc28/qemu-guest-agent-2.11.2-4.fc28.x86_64.rpm
+fc28_pkg: qemu-guest-agent-2.11.2-4.fc28.x86_64.rpm
+
+lp151_src_pkg: lp151/ovirt-guest-agent-common-1.0.12-1.1.noarch.rpm
+lp151_pkg: ovirt-guest-agent-common-1.0.12-1.1.noarch.rpm
+
+# IN THE END
+...

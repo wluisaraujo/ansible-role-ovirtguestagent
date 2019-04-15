@@ -1,0 +1,48 @@
+---
+# tasks file for corpflex-ovirt-guest-agent
+- name: "[NET INSTALL] Instalando oVirt Guest Agent para {{ ansible_distribution }}/{{ ansible_distribution_major_version }}"
+  when: ansible_distribution == "SLES" and ansible_distribution_major_version == '11'
+  zypper_repository:
+    repo: 'https://download.opensuse.org/repositories/Virtualization:oVirt/SLE_11_SP4/Virtualization:oVirt.repo'
+    state: present
+    auto_import_keys: yes
+    runrefresh: yes
+  ignore_errors: yes
+  register: REPOSITORY
+
+- name: "[NET INSTALL] Instalando oVirt Guest Agent para {{ ansible_distribution }}/{{ ansible_distribution_major_version }}"
+  when: ansible_distribution == "SLES" and ansible_distribution_major_version == '12'
+  zypper_repository:
+    repo: 'https://download.opensuse.org/repositories/Virtualization:oVirt/SLE_12/Virtualization:oVirt.repo'
+    state: present
+    auto_import_keys: yes
+    runrefresh: yes
+  ignore_errors: yes
+  register: REPOSITORY
+
+- name: "[NET INSTALL] Instalando oVirt Guest Agent para {{ ansible_distribution }}/{{ ansible_distribution_major_version }}"
+  when: ansible_distribution == "SLES" and ansible_distribution_major_version == '13'
+  zypper_repository:
+    repo: 'https://download.opensuse.org/repositories/Virtualization:oVirt/SLE_12_SP3/Virtualization:oVirt.repo'
+    state: present
+    auto_import_keys: yes
+    runrefresh: yes
+  ignore_errors: yes
+  register: REPOSITORY
+
+- zypper:
+    name: ovirt-guest-agent
+    state: present
+    update_cache: yes
+    disable_gpg_check: yes
+  when:  REPOSITORY is success
+  register: PACKAGE
+  notify:
+    - Enable ovirt-guest-agent
+    - Restart ovirt-guest-agent
+
+- include_tasks: service.yml
+  when: PACKAGE is success      
+
+## END PLAYBOOK
+...

@@ -1,0 +1,24 @@
+---
+# tasks file for corpflex-ovirt-guest-agent
+
+- name: "[LOCAL INSTALL] oVirt Guest Agent para {{ ansible_distribution }}/{{ ansible_distribution_major_version }}"
+  copy:
+    src: "{{ fc28_src_pkg }}"
+    dest: "/tmp/{{ fc28_pkg }}"
+    mode: 0755
+  when: ansible_distribution == "Fedora" and ansible_distribution_major_version < '28'
+  register: COPY
+
+- dnf:
+    name: "/tmp/{{ el7_pkg }}"
+    state: present
+  when: COPY is success
+  register: PACKAGE
+  notify:
+    - Enable ovirt-guest-agent
+    - Restart ovirt-guest-agent
+
+- include_tasks: service.yml
+  when: PACKAGE is success  
+## END PLAYBOOK      
+...

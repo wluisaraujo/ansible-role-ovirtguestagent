@@ -1,0 +1,28 @@
+---
+# tasks file for corpflex-ovirt-guest-agent
+
+- name: "[LOCAL INSTALL] oVirt Guest Agent para {{ ansible_distribution }}/{{ ansible_distribution_major_version }}"
+  when: ansible_distribution == "Debian"
+  copy:
+    src: "{{ deb_src_pkg }}"
+    dest: "/tmp/{{ deb_pkg }}"
+    mode: 0755
+  register: COPY
+
+- apt:
+    name: "/tmp/{{ deb_pkg }}"
+    state: present
+  when: COPY is success
+  register: PACKAGE
+  notify:
+    - Enable ovirt-guest-agent
+    - Restart ovirt-guest-agent
+  
+- include_tasks: files.yml
+  when: PACKAGE is success
+
+- include_tasks: service.yml
+  when: PACKAGE is success
+
+## END PLAYBOOK   
+...
