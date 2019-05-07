@@ -1,5 +1,6 @@
 ---
-# tasks file for corpflex-ovirt-guest-agent
+# tasks file for iac-ansible-ovirt-guest-agent
+
 - name: "[NET INSTALL] Instalando oVirt Guest Agent para {{ ansible_distribution }}/{{ ansible_distribution_major_version }}"
   when: ansible_distribution == "RedHat" and ansible_distribution_major_version == '6'
   rhsm_repository:
@@ -25,4 +26,6 @@
 
 - include_tasks: service.yml
   when: PACKAGE is success    
+
+## END PLAYBOOK
 ...

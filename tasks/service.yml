@@ -1,5 +1,6 @@
 ---
-# defaults tasks file for corpflex-ovirt-guest-agent
+# tasks file for iac-ansible-ovirt-guest-agent
+
 - service:
     name: "ovirt-guest-agent"
     enabled: yes

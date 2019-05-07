@@ -1,5 +1,6 @@
 ---
 # defaults file for iac-ansible-ovirt-guest-agent
+
 service_name: ovirt-guest-agent
 ovirt_package: []
 ovirt_guest_agent_service_name: []

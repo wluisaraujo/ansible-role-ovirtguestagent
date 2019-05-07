@@ -1,5 +1,6 @@
 ---
-# tasks file for corpflex-ovirt-guest-agent
+# tasks file for iac-ansible-ovirt-guest-agent
+
 - copy:
     src: 55-ovirt-guest-agent.rules 
     dest: /etc/udev/rules.d/55-ovirt-guest-agent.rules

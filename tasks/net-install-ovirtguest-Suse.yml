@@ -1,19 +1,54 @@
 ---
-# tasks file for corpflex-ovirt-guest-agent
+# tasks file for iac-ansible-ovirt-guest-agent
+
+#- name: check if rules file exists
+- stat: 
+    path: /etc/zypp/repos.d/Virtualization_oVirt.repo
+  register: FILEEXISTS
+
 - name: "[NET INSTALL] Instalando oVirt Guest Agent para {{ ansible_distribution }}/{{ ansible_distribution_major_version }}"
-  when: ansible_distribution == "SLES"
-  yum:
-    name: [ 'http://resources.ovirt.org/pub/yum-repo/ovirt-release43.rpm','epel-release' ] 
-    state: latest
+  when: ansible_os_family == "Suse" and ansible_distribution_major_version == '43.3' and FILEEXISTS.stat.exists == False
+  zypper_repository:
+    repo: 'https://download.opensuse.org/repositories/Virtualization:oVirt/openSUSE_Leap_42.3/Virtualization:oVirt.repo'
+    state: present
+    auto_import_keys: yes
+    runrefresh: yes
+  ignore_errors: yes
+  register: REPOSITORY
+
+- name: "[NET INSTALL] Instalando oVirt Guest Agent para {{ ansible_distribution }}/{{ ansible_distribution_major_version }}"
+  when: ansible_os_family == "Suse" and ansible_distribution_major_version == '42.2' and FILEEXISTS.stat.exists == False
+  zypper_repository:
+    repo: 'https://download.opensuse.org/repositories/Virtualization:oVirt/openSUSE_Leap_42.2/Virtualization:oVirt.repo'
+    state: present
+    auto_import_keys: yes
+    runrefresh: yes
+  ignore_errors: yes
+  register: REPOSITORY
+
+- name: "[NET INSTALL] Instalando oVirt Guest Agent para {{ ansible_distribution }}/{{ ansible_distribution_major_version }}"
+  when: ansible_os_family == "Suse" and ansible_distribution_major_version == '42.1' and FILEEXISTS.stat.exists == False
+  zypper_repository:
+    repo: 'https://download.opensuse.org/repositories/Virtualization:oVirt/openSUSE_Leap_42.1/Virtualization:oVirt.repo'
+    state: present
+    auto_import_keys: yes
+    runrefresh: yes
+  ignore_errors: yes
+  register: REPOSITORY
+
+- zypper:
+    name: ovirt-guest-agent
+    state: present
+    update_cache: yes
     disable_gpg_check: yes
-  ignore_errors: yes  
+  when:  REPOSITORY is success
   register: PACKAGE
   notify:
     - Enable ovirt-guest-agent
     - Restart ovirt-guest-agent
 
 - include_tasks: service.yml
-  when: PACKAGE is success
+  when: PACKAGE is success      
 
 ## END PLAYBOOK
 ...

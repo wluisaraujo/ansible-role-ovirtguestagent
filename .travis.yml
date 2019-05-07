@@ -22,22 +22,23 @@ env:
      
  - distribution: centos
    version: 7
+ - distribution: centos
+   version: 6   
  - distribution: fedora
-   version: 26
+   version: 29
  - distribution: fedora
-   version: 25
- - distribution: fedora
-   version: 24
+   version: 28
  - distribution: ubuntu
-   version: trust
+   version: bionic   
  - distribution: ubuntu
    version: trusty
+ - distribution: ubuntu
+   version: xenial 
  - distribution: debian
    version: stretch
  - distribution: debian
    version: jessie
 
-    
 # Install ansible
 addons:
  apt:

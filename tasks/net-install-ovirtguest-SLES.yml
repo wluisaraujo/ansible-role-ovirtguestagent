@@ -1,7 +1,13 @@
 ---
-# tasks file for corpflex-ovirt-guest-agent
+# tasks file for iac-ansible-ovirt-guest-agent
+
+#- name: check if rules file exists
+- stat: 
+    path: /etc/zypp/repos.d/Virtualization_oVirt.repo
+  register: FILEEXISTS
+
 - name: "[NET INSTALL] Instalando oVirt Guest Agent para {{ ansible_distribution }}/{{ ansible_distribution_major_version }}"
-  when: ansible_distribution == "SLES" and ansible_distribution_major_version == '11'
+  when: ansible_distribution == "SLES" and ansible_distribution_major_version == '11' and FILEEXISTS.stat.exists == False
   zypper_repository:
     repo: 'https://download.opensuse.org/repositories/Virtualization:oVirt/SLE_11_SP4/Virtualization:oVirt.repo'
     state: present
@@ -11,7 +17,7 @@
   register: REPOSITORY
 
 - name: "[NET INSTALL] Instalando oVirt Guest Agent para {{ ansible_distribution }}/{{ ansible_distribution_major_version }}"
-  when: ansible_distribution == "SLES" and ansible_distribution_major_version == '12'
+  when: ansible_distribution == "SLES" and ansible_distribution_major_version == '12' and FILEEXISTS.stat.exists == False
   zypper_repository:
     repo: 'https://download.opensuse.org/repositories/Virtualization:oVirt/SLE_12/Virtualization:oVirt.repo'
     state: present
@@ -21,7 +27,7 @@
   register: REPOSITORY
 
 - name: "[NET INSTALL] Instalando oVirt Guest Agent para {{ ansible_distribution }}/{{ ansible_distribution_major_version }}"
-  when: ansible_distribution == "SLES" and ansible_distribution_major_version == '13'
+  when: ansible_distribution == "SLES" and ansible_distribution_major_version == '13' and FILEEXISTS.stat.exists == False
   zypper_repository:
     repo: 'https://download.opensuse.org/repositories/Virtualization:oVirt/SLE_12_SP3/Virtualization:oVirt.repo'
     state: present
