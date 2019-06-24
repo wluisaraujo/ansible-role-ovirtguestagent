@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: iac-ansible-ovirt-guest-agent
   author: w.luis.araujo
   description: "Ansible role for install Ovirt Guest Agent"
   company: LUSAR | wluisaraujo.github.io
