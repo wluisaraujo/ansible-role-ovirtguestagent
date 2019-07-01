@@ -38,8 +38,8 @@ Example Playbook
   vars:
     - name: value
   roles:
-    - iac-ansible-ovirt-guest-agent
-...    
+    - ovirtguestagent
+...
 ```
 
 ----------------
