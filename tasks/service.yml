@@ -1,5 +1,5 @@
 ---
-# tasks file for iac-ansible-ovirt-guest-agent
+# tasks file for ovirtguestagent
 
 - service:
     name: "ovirt-guest-agent"

@@ -1,5 +1,5 @@
 ---
-# tasks file for iac-ansible-ovirt-guest-agent
+# tasks file for ovirtguestagent
 
 - assert:
     msg: "Só pode ser aplicada ao ambiente Linux"

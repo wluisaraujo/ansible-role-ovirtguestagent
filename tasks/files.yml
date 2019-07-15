@@ -1,5 +1,5 @@
 ---
-# tasks file for iac-ansible-ovirt-guest-agent
+# tasks file for ovirtguestagent
 
 - copy:
     src: 55-ovirt-guest-agent.rules 

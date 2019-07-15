@@ -1,5 +1,5 @@
 ---
-# tasks file for iac-ansible-ovirt-guest-agent
+# tasks file for ovirtguestagent
 
 #- name: check if rules file exists
 - stat: 
