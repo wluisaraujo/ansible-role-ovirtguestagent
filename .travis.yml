@@ -22,22 +22,18 @@ env:
      
  - distribution: centos
    version: 7
- - distribution: centos
-   version: 6   
  - distribution: fedora
-   version: 29
+   version: 30
  - distribution: fedora
-   version: 28
+   version: 29  
  - distribution: ubuntu
-   version: bionic   
+   version: bionic
  - distribution: ubuntu
-   version: trusty
- - distribution: ubuntu
-   version: xenial 
+   version: xenial  
+ - distribution: debian
+   version: buster
  - distribution: debian
    version: stretch
- - distribution: debian
-   version: jessie
 
 # Install ansible
 addons:
@@ -55,15 +51,13 @@ install:
 # Create ansible.cfg with correct roles_path
  - printf '[defaults]\nroles_path=../' >ansible.cfg
 
-
  # Install ansible role
  - ansible-galaxy install wluisaraujo.ovirtguestagent
 
 script:
  # Basic role syntax check
  - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
- - ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo --check
-
+ - ansible-playbook -i tests/inventory tests/test.yml --connection=local --check
 
 notifications:
  webhooks: https://galaxy.ansible.com/api/v1/notifications/

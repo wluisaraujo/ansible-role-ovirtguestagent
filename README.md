@@ -1,6 +1,6 @@
-[![Ansible Galaxy](https://img.shields.io/badge/Ansible%20Galaxy-oVirt%20SGuestAgent-blue.svg)](https://galaxy.ansible.com/wluisaraujo/ansible_ovirt_guest_agent) [![Build Status](https://travis-ci.org/wluisaraujo/iac-ansible-ovirt-guest-agent.svg?branch=master)](https://travis-ci.org/wluisaraujo/iac-ansible-ovirt-guest-agent)
+[![Ansible Galaxy](https://img.shields.io/badge/Ansible%20Galaxy-oVirt%20SGuestAgent-blue.svg)](https://galaxy.ansible.com/wluisaraujo/ovirtguestagent) [![Build Status](https://travis-ci.org/wluisaraujo/ansible-role-ovirtguestagent.svg?branch=master)](https://travis-ci.org/wluisaraujo/ansible-role-ovirtguestagent)
 ---
-# IaC: with [Ansible](https://www.ansible.com) role to install and configure [AWX](https://github.com/ansible/awx)
+# IaC: with [Ansible](https://www.ansible.com) role to install and configure [oVirtGuestAgent](https://www.ovirt.org)
 ------------
 
 Description
@@ -17,7 +17,7 @@ Installation
 ------------
 
 ```bash
-ansible-galaxy install wluisaraujo.ansible_ovirt_guest_agent
+user@localhost:~$ ansible-galaxy install wluisaraujo.ovirtguestagent
 ```
 
 Role Variables
