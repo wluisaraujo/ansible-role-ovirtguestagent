@@ -16,8 +16,8 @@ Requirements
 Installation
 ------------
 
-```bash
-user@localhost:~$ ansible-galaxy install wluisaraujo.ovirtguestagent
+```console
+vagrant@localhost:~$ ansible-galaxy install wluisaraujo.ovirtguestagent
 ```
 
 Role Variables
